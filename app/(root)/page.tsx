@@ -7,7 +7,7 @@ export default async function Home({
 }) {
   const query = (await searchParams).query;
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-amber-500 text-gray-900 px-4">
+    <section className="min-h-screen flex flex-col items-center justify-center bg-gray-600 text-gray-900 px-4">
       <div className="text-center max-w-2xl">
         <h1 className="text-4xl font-bold text-black leading-tight">
           Pitch Your Start-Up <br />
