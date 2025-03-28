@@ -1,5 +1,5 @@
-import SearchForm from "../components/SearchForm";
 import bgImage from "@/assets/bgImg.jpg";
+import SearchForm from "@/components/SearchForm";
 
 interface HomeProps {
   searchParams: Promise<{ query?: string }>;
