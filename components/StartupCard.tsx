@@ -3,12 +3,17 @@ import Link from "next/link";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { Author, Startup } from "@/sanity/types";
+
+export type StartupTypeCard = Omit<Startup
+, "author"> & { author?: Author };
+
 
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const {
     _createdAt,
     views,
-    author: { _id: authorId, name },
+    author,
     title,
     category,
     _id,
@@ -28,14 +33,14 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 
       <div className="flex justify-between items-center mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${authorId}`}>
-            <p className="text-base font-medium truncate">{name}</p>
+          <Link href={`/user/${author?._id}`}>
+            <p className="text-base font-medium truncate">{author?.name}</p>
           </Link>
           <Link href={`/startup/${_id}`}>
             <h3 className="text-2xl font-semibold truncate">{title}</h3>
           </Link>
         </div>
-        <Link href={`/user/${authorId}`}>
+        <Link href={`/user/${author?._id}`}>
           <Image
             src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?q=80&w=1336&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Placeholder"

@@ -1,6 +1,8 @@
 import bgImage from "@/assets/bgImg.jpg";
 import SearchForm from "@/components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 interface HomeProps {
   searchParams: Promise<{ query?: string }>;
@@ -10,19 +12,21 @@ export default async function Home({ searchParams }: HomeProps) {
   const query = (await searchParams).query;
   const backgroundUrl = bgImage.src;
 
-  const posts = [
-    {
-      _id: 1,
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 1, name: "vishal" },
-      description: "this is desc",
-      image:
-        "https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?q=80&w=1336&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      category: "robots",
-      title: "we reobots",
-    },
-  ];
+  const posts = await client.fetch(STARTUPS_QUERY);
+
+  // const posts = [
+  //   {
+  //     _id: 1,
+  //     _createdAt: new Date(),
+  //     views: 55,
+  //     author: { _id: 1, name: "vishal" },
+  //     description: "this is desc",
+  //     image:
+  //       "https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?q=80&w=1336&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     category: "robots",
+  //     title: "we reobots",
+  //   },
+  // ];
 
   return (
     <>
@@ -50,7 +54,7 @@ export default async function Home({ searchParams }: HomeProps) {
         </p>
         <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
           {posts?.length > 0 ? (
-            posts.map((post: any, index: number) => (
+            posts.map((post: StartupTypeCard) => (
               <StartupCard key={post._id} post={post} />
             ))
           ) : (
