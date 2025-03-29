@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "easymde/dist/easymde.min.css"; // so that our markdown plugin of sanity works perfectly
 
 const workSans = localFont({
   src: [
