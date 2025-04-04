@@ -11,11 +11,14 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const query = (await searchParams).query;
+
+  const params = { search: query || null };
+
   const backgroundUrl = bgImage.src;
 
   // const posts = await client.fetch(STARTUPS_QUERY);
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY }); 
-  
+  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+
   // const posts = [
   //   {
   //     _id: 1,
